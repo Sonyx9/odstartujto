@@ -1,0 +1,27 @@
+---
+import Container from './ui/Container.astro';
+---
+
+<footer class="bg-neutral-900 text-neutral-300 py-12">
+  <Container>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-4">Odstartujto</h3>
+        <p class="text-neutral-400">Jednoduché statické weby a navazující marketing.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Kontakt</h4>
+        <a href="mailto:info@odstartujto.cz" class="text-neutral-400 hover:text-white">info@odstartujto.cz</a><br />
+        <a href="tel:+420123456789" class="text-neutral-400 hover:text-white">+420 123 456 789</a>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Právní informace</h4>
+        <a href="/privacy" class="text-neutral-400 hover:text-white">GDPR</a><br />
+        <a href="/cookies" class="text-neutral-400 hover:text-white">Cookies</a>
+      </div>
+    </div>
+    <div class="border-t border-neutral-800 pt-8 mt-8 text-center text-neutral-500 text-sm">
+      © {new Date().getFullYear()} Odstartujto. Všechna práva vyhrazena.
+    </div>
+  </Container>
+</footer>

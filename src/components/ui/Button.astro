@@ -1,0 +1,11 @@
+---
+interface Props { href?: string; variant?: 'primary' | 'secondary'; type?: 'button' | 'submit'; class?: string; }
+const { href, variant = 'primary', type = 'button', class: c = '' } = Astro.props;
+const base = 'inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold transition-all';
+const v = variant === 'primary' ? 'bg-[#292e4c] text-white hover:opacity-90' : 'bg-neutral-100 text-[#292e4c] hover:bg-neutral-200';
+---
+{href ? (
+  <a href={href} class={`${base} ${v} ${c}`}><slot /></a>
+) : (
+  <button type={type} class={`${base} ${v} ${c}`}><slot /></button>
+)}

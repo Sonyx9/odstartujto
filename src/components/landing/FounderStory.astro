@@ -1,0 +1,86 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+---
+
+<section id="o-nas" class="py-16 md:py-24 bg-white scroll-mt-20">
+  <Container>
+    <div class="max-w-5xl mx-auto">
+      <!-- Nadpis -->
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-3">Kdo za tím stojí</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">
+          Dělali jsme weby pro velké hráče.<br />
+          <span class="font-normal text-neutral-600">Dnes nás baví pomáhat těm malým.</span>
+        </h2>
+      </div>
+
+      <!-- Příběh -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <!-- Foto / vizuální element -->
+        <div class="relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-xl border-2 border-neutral-100">
+            <img
+              src="/images/team-member.webp"
+              alt="Tým Odstartujto – Lukáš a Standa"
+              class="w-full h-72 md:h-96 object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Plovoucí badge -->
+          <div class="absolute -bottom-5 -right-3 md:-right-6 bg-[#fdc700] text-neutral-900 rounded-2xl px-5 py-3 shadow-lg font-bold text-sm">
+            10+ let v oboru
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="space-y-5">
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            Začínali jsme jako klasická agentura — velké projekty, složité systémy, měsíce vývoje. Pracovali jsme pro firmy, kde rozhodnutí o designu tlačilo přes šest lidí a faktura vypadala jako malé auto.
+          </p>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            Jenže nás pořád víc bavily schůzky s živnostníky a majiteli malých firem. Lidé, kteří mají skvělý produkt nebo službu — ale online jsou neviditelní. Nebo mají web, který jim nepomáhá.
+          </p>
+          <p class="text-lg text-neutral-700 leading-relaxed font-medium text-neutral-800">
+            Tak jsme se rozhodli to zjednodušit. Vytvořili jsme model, kde dostanete to, co opravdu potřebujete — <span class="text-[#292e4c] font-bold">funkční web rychle a za férovou cenu.</span> Bez zbytečného balastu.
+          </p>
+
+          <!-- Podpisy -->
+          <div class="flex items-center gap-6 pt-4 border-t border-neutral-100">
+            <div class="text-center">
+              <div class="w-12 h-12 rounded-full bg-[#292e4c] flex items-center justify-center text-white font-bold text-lg mx-auto mb-1">L</div>
+              <p class="font-semibold text-sm text-neutral-800">Lukáš</p>
+              <p class="text-xs text-neutral-500">Google Ads & marketing</p>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 rounded-full bg-[#fdc700] flex items-center justify-center text-neutral-900 font-bold text-lg mx-auto mb-1">S</div>
+              <p class="font-semibold text-sm text-neutral-800">Standa</p>
+              <p class="text-xs text-neutral-500">Tvorba & technická správa</p>
+            </div>
+            <div class="flex-1 pl-2">
+              <p class="text-sm text-neutral-600 italic">"Každý podnikatel si zaslouží web, který mu pomáhá — ne web, který mu překáží."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kapacita / urgence -->
+      <div class="mt-14 bg-[#292e4c] text-white rounded-2xl px-8 py-7 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-[#fdc700] rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-bold text-lg">Pracujeme s omezeným počtem klientů</p>
+            <p class="text-white/70 text-sm">Každý projekt dostává naši plnou pozornost. Proto nepřijímáme více než 5 nových webů měsíčně.</p>
+          </div>
+        </div>
+        <Button href="#poptavka" variant="secondary" class="whitespace-nowrap flex-shrink-0 bg-[#fdc700] text-neutral-900 hover:bg-[#e6b300] border-0">
+          Ověřit volný termín
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>

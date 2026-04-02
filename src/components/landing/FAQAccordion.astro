@@ -1,0 +1,45 @@
+---
+import Container from '../ui/Container.astro';
+
+const faqs = [
+  { q: 'Kolik stojí jednoduchý statický web?', a: 'Cena webu je přehledná a výrazně nižší než u agenturní tvorby. Platíte za hotový web včetně hostingu a základní správy. Navazující marketing (Google Ads) nabízíme volitelně od 1 970 Kč/měsíc.' },
+  { q: 'Je prodej webu vhodný i pro malé firmy a živnostníky?', a: 'Ano. Jednoduché statické weby jsou ideální pro podnikatele, kteří chtějí profesionální webové stránky za férovou cenu. Nabízíme i navazující marketing, když budete chtít růst.' },
+  { q: 'Jak rychle můžete web spustit?', a: 'Díky předpřipravené struktuře můžeme web spustit během několika dnů, nikoliv měsíců. Rychlé spuštění je u nás standard.' },
+  { q: 'Co když budu chtít web upravit nebo změnit obsah?', a: 'Úpravy webu řešíme i po předání. Navazující marketing zahrnuje i průběžnou péči o obsah a SEO.' },
+  { q: 'Budu web vlastnit?', a: 'Ano. Web kupujete a vlastníte. Po předání běží na vaší doméně. Navazující marketing (Google Ads) nabízíme jako dobrovolnou službu.' },
+  { q: 'Co je navazující marketing?', a: 'Správa reklamních kampaní Google Ads a průběžná péče o viditelnost webu. Nabízíme ho volitelně po dokončení webu.' },
+];
+---
+
+<section class="py-16 md:py-24 bg-white" id="faq">
+  <Container>
+    <h2 class="text-3xl font-bold mb-12 text-center">Často kladené otázky</h2>
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq, i) => (
+        <div class="border border-neutral-200 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-neutral-50 font-semibold" data-i={i}>
+            {faq.q}
+            <svg class="faq-icon w-6 h-6 text-[#292e4c] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 text-neutral-600" data-i={i}>{faq.a}</div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const i = btn.getAttribute('data-i');
+      const content = document.querySelector(`.faq-content[data-i="${i}"]`);
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !content?.classList.contains('hidden');
+      document.querySelectorAll('.faq-content').forEach((c) => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach((ic) => ic.classList.remove('rotate-180'));
+      if (!isOpen) {
+        content?.classList.remove('hidden');
+        icon?.classList.add('rotate-180');
+      }
+    });
+  });
+</script>

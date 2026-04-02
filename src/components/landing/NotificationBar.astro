@@ -1,0 +1,23 @@
+---
+---
+<div id="notification-bar" class="bg-[#292e4c] py-2.5 px-3 w-full">
+  <div class="container mx-auto flex items-center justify-center gap-2 relative min-h-[36px]">
+    <div class="flex items-center justify-center gap-2">
+      <span class="text-[#fdc700] text-base">⚡</span>
+      <p class="text-white text-xs md:text-sm font-medium text-center">
+        <strong class="text-[#fdc700]">Pracujeme s limitovanou kapacitou.</strong> Objednávky zpracováváme v pořadí – <strong>zjistěte dostupnost.</strong>
+      </p>
+    </div>
+    <button id="close-notification" class="absolute right-3 md:right-6 text-white/60 hover:text-white transition-colors" aria-label="Zavřít">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+</div>
+<script>
+  const bar = document.getElementById('notification-bar');
+  document.getElementById('close-notification')?.addEventListener('click', () => {
+    bar?.classList.add('hidden');
+    try { localStorage.setItem('notification-bar-closed', 'true'); } catch (_) {}
+  });
+  if (localStorage.getItem('notification-bar-closed') === 'true') bar?.classList.add('hidden');
+</script>

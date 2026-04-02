@@ -1,0 +1,125 @@
+---
+import Container from '../ui/Container.astro';
+
+// Odesílá na serverový proxy /api/send-lead (ten volá Google Apps Script) – žádný CORS. Token musí odpovídat script.js.
+const FORM_ACTION = import.meta.env.PUBLIC_FORM_ACTION ?? '/api/send-lead';
+const FORM_TOKEN = import.meta.env.PUBLIC_FORM_TOKEN ?? '1506-123-12-157489-13589-odstartujto';
+---
+
+<section class="py-16 md:py-24 bg-[#292e4c]" id="poptavka">
+  <Container>
+    <div class="max-w-2xl mx-auto bg-white rounded-2xl p-6 md:p-8 shadow-xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Nezávazná poptávka</h2>
+      <p class="text-neutral-600 text-center mb-8">Vyplňte formulář a ozveme se do 48 hodin.</p>
+      <form
+        id="lead-form"
+        class="space-y-6"
+        data-action={FORM_ACTION}
+        data-token={FORM_TOKEN}
+      >
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block text-sm font-semibold mb-2 text-neutral-800">Jméno a příjmení *</label>
+            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="Jan Novák" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-semibold mb-2 text-neutral-800">E-mail *</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="jan@example.cz" />
+          </div>
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-semibold mb-2 text-neutral-800">Telefon *</label>
+          <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="+420 123 456 789" />
+        </div>
+        <div>
+          <label for="goal" class="block text-sm font-semibold mb-2 text-neutral-800">Cíl webu *</label>
+          <select id="goal" name="goal" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent">
+            <option value="">Vyberte cíl webu</option>
+            <option value="poptavky">Poptávky a prodej</option>
+            <option value="prezentace">Prezentace firmy</option>
+            <option value="nabor">Nábor zaměstnanců</option>
+            <option value="jine">Jiné</option>
+          </select>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-semibold mb-2 text-neutral-800">Zpráva *</label>
+          <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent resize-none" placeholder="Napište, co od webu očekáváte..."></textarea>
+        </div>
+        <div class="relative">
+          <button type="submit" id="form-submit-btn" class="w-full bg-[#292e4c] hover:opacity-90 text-white font-semibold text-lg py-4 rounded-2xl transition-opacity disabled:opacity-70 disabled:pointer-events-none">
+            Odeslat poptávku
+          </button>
+          <div id="form-loading" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/95 rounded-2xl py-4">
+            <svg class="animate-spin h-8 w-8 text-[#292e4c]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-neutral-700 font-semibold">Vyčkejte, odesílám…</span>
+          </div>
+        </div>
+        <p class="text-sm text-center text-neutral-500">Všechna pole jsou povinná. Ozveme se do 48 hodin.</p>
+      </form>
+      <div id="form-success" class="hidden text-center py-8">
+        <p class="text-2xl font-bold text-green-600 mb-2">Děkujeme za poptávku!</p>
+        <p class="text-neutral-600">Ozveme se vám do 48 hodin.</p>
+      </div>
+      <div id="form-error" class="hidden text-center py-4">
+        <p class="text-red-600 font-semibold"></p>
+      </div>
+    </div>
+  </Container>
+</section>
+<script>
+  const form = document.getElementById('lead-form');
+  const submitBtn = document.getElementById('form-submit-btn');
+  const formLoading = document.getElementById('form-loading');
+  const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
+  const formErrorText = formError?.querySelector('p');
+
+  function setLoading(loading) {
+    if (submitBtn) submitBtn.disabled = loading;
+    if (formLoading) formLoading.classList.toggle('hidden', !loading);
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.dataset.action || !form.dataset.token) {
+      alert('Formulář není nakonfigurován (FORM_ACTION / FORM_TOKEN).');
+      return;
+    }
+    formError?.classList.add('hidden');
+    setLoading(true);
+    const payload = {
+      token: form.dataset.token,
+      website: (form.querySelector('[name="website"]')?.value || '').trim(),
+      name: (form.querySelector('[name="name"]')?.value || '').trim(),
+      email: (form.querySelector('[name="email"]')?.value || '').trim(),
+      phone: (form.querySelector('[name="phone"]')?.value || '').trim(),
+      goal: (form.querySelector('[name="goal"]')?.value || '').trim(),
+      message: (form.querySelector('[name="message"]')?.value || '').trim(),
+      source: (typeof window !== 'undefined' && window.location?.href) ? window.location.href : ''
+    };
+    try {
+      const res = await fetch(form.dataset.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(() => ({}));
+      setLoading(false);
+      if (res.ok && data.ok) {
+        form.style.display = 'none';
+        formSuccess?.classList.remove('hidden');
+      } else {
+        if (formErrorText) formErrorText.textContent = data.error || 'Něco se pokazilo. Zkuste to znovu.';
+        formError?.classList.remove('hidden');
+      }
+    } catch (_) {
+      setLoading(false);
+      if (formErrorText) formErrorText.textContent = 'Nepodařilo se odeslat. Zkontrolujte připojení a zkuste to znovu.';
+      formError?.classList.remove('hidden');
+    }
+  });
+</script>

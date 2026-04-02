@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #292e4c;
+  --color-yellow-400: #fdc700;
+  --color-blue-custom: #353A61;
+}
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-neutral-800 bg-white;
+  }
+}

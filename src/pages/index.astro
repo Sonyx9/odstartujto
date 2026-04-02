@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/landing/Hero.astro';
+import TrustBar from '../components/landing/TrustBar.astro';
+import SolutionWaas from '../components/landing/SolutionWaas.astro';
+import WhyOurWebs from '../components/landing/WhyOurWebs.astro';
+import HowItWorksSteps from '../components/landing/HowItWorksSteps.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
+import FAQAccordion from '../components/landing/FAQAccordion.astro';
+import LeadForm from '../components/landing/LeadForm.astro';
+---
+
+<BaseLayout
+  title="Odstartujto – Web, který přivádí zákazníky | Lukáš & Standa"
+  description="Statický web od 9 400 Kč. Spuštění do 5 dnů. 50+ spokojených klientů. Bez dlouhého čekání a přemrštěných cen."
+>
+  <Hero />
+  <TrustBar />
+  <SolutionWaas />
+  <HowItWorksSteps />
+  <WhyOurWebs />
+  <Testimonials />
+  <FAQAccordion />
+  <LeadForm />
+</BaseLayout>
