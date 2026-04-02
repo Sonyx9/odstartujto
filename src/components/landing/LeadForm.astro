@@ -1,8 +1,10 @@
 ---
 import Container from '../ui/Container.astro';
 
-// Odesílá na serverový proxy /api/send-lead (ten volá Google Apps Script) – žádný CORS. Token musí odpovídat script.js.
-const FORM_ACTION = import.meta.env.PUBLIC_FORM_ACTION ?? '/api/send-lead';
+// Na statickém hostingu (GitHub Pages) přímo Google Apps Script; lokálně lze přepsat PUBLIC_FORM_ACTION na /api/send-lead s `astro dev` + SSR.
+const FORM_ACTION_DEFAULT =
+  'https://script.google.com/macros/s/AKfycbzCT1aeSBP8LROuszNjbLTibvk08NttjLi_4UEyozgzdPAm2i9hsvjsTcziBHspBqW0vg/exec';
+const FORM_ACTION = import.meta.env.PUBLIC_FORM_ACTION ?? FORM_ACTION_DEFAULT;
 const FORM_TOKEN = import.meta.env.PUBLIC_FORM_TOKEN ?? '1506-123-12-157489-13589-odstartujto';
 ---
 

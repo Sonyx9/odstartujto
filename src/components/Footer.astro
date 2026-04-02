@@ -1,5 +1,7 @@
 ---
 import Container from './ui/Container.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="bg-neutral-900 text-neutral-300 py-12">
@@ -16,8 +18,8 @@ import Container from './ui/Container.astro';
       </div>
       <div>
         <h4 class="text-white font-semibold mb-4">Právní informace</h4>
-        <a href="/privacy" class="text-neutral-400 hover:text-white">GDPR</a><br />
-        <a href="/cookies" class="text-neutral-400 hover:text-white">Cookies</a>
+        <a href={`${base}privacy`} class="text-neutral-400 hover:text-white">GDPR</a><br />
+        <a href={`${base}cookies`} class="text-neutral-400 hover:text-white">Cookies</a>
       </div>
     </div>
     <div class="border-t border-neutral-800 pt-8 mt-8 text-center text-neutral-500 text-sm">

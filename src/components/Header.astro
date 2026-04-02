@@ -1,17 +1,19 @@
 ---
 import Container from './ui/Container.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
   <Container>
     <nav class="flex items-center justify-between md:justify-center py-2 md:py-3 gap-4">
-      <a href="/" class="flex items-center flex-shrink-0">
-        <img src="/logo.png" alt="Odstartujto" class="h-10 md:h-12 w-auto" />
+      <a href={base} class="flex items-center flex-shrink-0">
+        <img src={`${base}logo.png`} alt="Odstartujto" class="h-10 md:h-12 w-auto" />
       </a>
       <div class="hidden md:flex items-center gap-5">
-        <a href="/jak-to-funguje" class="text-neutral-600 hover:text-[#292e4c] text-sm">Jak to funguje</a>
-        <a href="/cenik" class="text-neutral-600 hover:text-[#292e4c] text-sm">Ceník</a>
-        <a href="/reference" class="text-neutral-600 hover:text-[#292e4c] text-sm">Reference</a>
+        <a href={`${base}#jak-funguje`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Jak to funguje</a>
+        <a href={`${base}#reseni`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Ceník</a>
+        <a href={`${base}#reference`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Reference</a>
         <a href="#poptavka" class="bg-[#fdc700] text-neutral-900 hover:bg-[#e6b300] font-semibold text-sm px-4 py-2 rounded-xl transition-colors">Zjistit cenu</a>
       </div>
       <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-600 ml-auto" aria-label="Menu">
@@ -19,9 +21,9 @@ import Container from './ui/Container.astro';
       </button>
     </nav>
     <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-neutral-100 pt-2">
-      <a href="/jak-to-funguje" class="block py-2 text-neutral-600 text-base">Jak to funguje</a>
-      <a href="/cenik" class="block py-2 text-neutral-600 text-base">Ceník</a>
-      <a href="/reference" class="block py-2 text-neutral-600 text-base">Reference</a>
+      <a href={`${base}#jak-funguje`} class="block py-2 text-neutral-600 text-base">Jak to funguje</a>
+      <a href={`${base}#reseni`} class="block py-2 text-neutral-600 text-base">Ceník</a>
+      <a href={`${base}#reference`} class="block py-2 text-neutral-600 text-base">Reference</a>
       <a href="#poptavka" class="block py-2 text-base font-semibold text-[#292e4c] bg-[#fdc700]/20 rounded-lg px-3 py-2 mt-2 text-center">Zjistit cenu</a>
     </div>
   </Container>

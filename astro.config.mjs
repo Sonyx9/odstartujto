@@ -3,15 +3,13 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import node from '@astrojs/node';
-
 // https://astro.build/config
+// GitHub Pages: statický výstup (SSR s Node na Pages neběží)
 export default defineConfig({
-  output: 'server',
+  site: 'https://sonyx9.github.io',
+  base: '/odstartujto/',
+  output: 'static',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-  adapter: node({
-    mode: 'standalone'
-  })
 });
