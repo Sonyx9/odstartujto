@@ -4,10 +4,10 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
-// GitHub Pages: statický výstup (SSR s Node na Pages neběží)
+// Statický výstup. Produkční doména: odstartujto.cz (GitHub Pages + vlastní doména).
 export default defineConfig({
-  site: 'https://sonyx9.github.io',
-  base: '/odstartujto/',
+  site: 'https://odstartujto.cz',
+  base: '/',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],
