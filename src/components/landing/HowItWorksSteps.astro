@@ -2,25 +2,45 @@
 import Container from '../ui/Container.astro';
 
 const steps = [
-  { num: '1', title: 'Konzultace', desc: 'pochopíme váš cíl' },
-  { num: '2', title: 'Tvorba webu', desc: 'přizpůsobíme obsah i strukturu' },
-  { num: '3', title: 'Předání', desc: 'web je váš, běží pod vaší doménou' },
-  { num: '4', title: 'Buďte vidět', desc: 'nabízíme navazující SEO a reklamu' },
+  {
+    num: '1',
+    title: 'Zavoláme si',
+    desc: 'Napíšete nám nebo zavoláte. Řeknete, co děláte, pro koho a co od webu čekáte. Žádné formuláře na 12 stran – jen normální rozhovor.',
+  },
+  {
+    num: '2',
+    title: 'Uděláme to za vás',
+    desc: 'Texty, struktura, vizuál – to vše přizpůsobíme vašemu oboru. Vy průběžně schvalujete. My ladíme. Žádné čekání v nekonečné frontě.',
+  },
+  {
+    num: '3',
+    title: 'Web je váš',
+    desc: 'Spustíme ho na vaší doméně. Od té chvíle je to váš web – ne pronajatý, ne vázaný smlouvou. Vaše, navždy.',
+  },
+  {
+    num: '4',
+    title: 'Zákazníci vás najdou',
+    desc: 'Chcete být vidět i v Google? Postaráme se o reklamu nebo SEO – ale jen tehdy, když to pro vás skutečně dává smysl.',
+  },
 ];
 ---
 
 <section id="jak-funguje" class="py-12 md:py-16 bg-neutral-50 scroll-mt-20">
   <Container>
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center">Jak funguje prodej webu</h2>
+      <div class="text-center mb-10">
+        <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-3">Jak to probíhá</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-800">Od prvního "ahoj" ke spuštěnému webu</h2>
+        <p class="text-neutral-600 mt-3 max-w-xl mx-auto">Celý proces jsme zjednodušili tak, aby vás nezdržoval – a abyste věděli, co bude dál.</p>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
         {steps.map((step) => (
-          <div class="bg-white rounded-2xl p-6 shadow-md border-2 border-neutral-100 text-center hover:border-[#fdc700]/40 transition-colors">
-            <div class="w-14 h-14 bg-[#fdc700] text-neutral-900 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+          <div class="bg-white rounded-2xl p-6 shadow-md border-2 border-neutral-100 hover:border-[#fdc700]/40 transition-colors flex flex-col">
+            <div class="w-12 h-12 bg-[#fdc700] text-neutral-900 rounded-full flex items-center justify-center mb-4 text-lg font-bold flex-shrink-0">
               {step.num}
             </div>
             <h3 class="text-lg font-bold mb-2 text-neutral-800">{step.title}</h3>
-            <p class="text-neutral-600 text-sm">{step.desc}</p>
+            <p class="text-neutral-600 text-sm leading-relaxed flex-1">{step.desc}</p>
           </div>
         ))}
       </div>

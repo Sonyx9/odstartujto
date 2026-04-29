@@ -3,13 +3,15 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import node from '@astrojs/node';
+
 // https://astro.build/config
-// Statický výstup. Produkční doména: odstartujto.cz (GitHub Pages + vlastní doména).
 export default defineConfig({
-  site: 'https://odstartujto.cz',
-  base: '/',
-  output: 'static',
+  output: 'server',
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()]
   },
+  adapter: node({
+    mode: 'standalone'
+  })
 });

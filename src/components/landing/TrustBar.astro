@@ -2,24 +2,43 @@
 import Container from '../ui/Container.astro';
 
 const stats = [
-  { value: '50+', label: 'spokojených klientů' },
-  { value: '10+', label: 'let v oboru' },
-  { value: '5 dnů', label: 'průměrné spuštění' },
-  { value: '24/7', label: 'technická správa' },
+  {
+    value: '50+',
+    label: 'spokojených klientů',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>`,
+  },
+  {
+    value: '10+',
+    label: 'let v oboru',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>`,
+  },
+  {
+    value: '5 dnů',
+    label: 'průměrné spuštění',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>`,
+  },
+  {
+    value: '24/7',
+    label: 'technická správa',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>`,
+  },
 ];
 ---
 
-<section class="py-12 md:py-16 bg-[#fdc700]/10">
+<section class="bg-[#292e4c] py-14 md:py-20">
   <Container>
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-800 text-center mb-10 md:mb-14">
-        Čísla, která <span class="bg-[#fdc700] px-2 py-0.5 rounded">mluví za nás</span>
-      </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-10">Čísla, která mluví za nás</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
         {stats.map((stat) => (
-          <div class="text-center py-4 px-2 md:py-6 md:px-4 rounded-xl bg-white/90 hover:bg-white transition-colors border border-white/50 hover:border-[#fdc700]/40 shadow-sm">
-            <div class="text-3xl md:text-4xl font-bold text-neutral-900 mb-1">{stat.value}</div>
-            <div class="text-sm md:text-base text-neutral-600 font-medium">{stat.label}</div>
+          <div class="bg-[#292e4c] hover:bg-[#353a61] transition-colors px-6 py-8 flex flex-col items-center text-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-[#fdc700]/15 flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={stat.icon} />
+            </div>
+            <div>
+              <div class="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+              <div class="text-sm text-white/60 font-medium">{stat.label}</div>
+            </div>
           </div>
         ))}
       </div>

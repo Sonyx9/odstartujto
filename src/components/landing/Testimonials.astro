@@ -7,14 +7,15 @@ const testimonials = [
     name: 'Martin K.',
     role: 'Instalatér, Praha',
     initial: 'M',
-    color: 'bg-[#292e4c]',
+    accent: 'bg-[#292e4c]',
+    textColor: 'text-white',
   },
   {
     text: 'Bál jsem se, že to bude složité a drahé. Bylo to přesně naopak – rychlé, přehledné a za rozumné peníze. A pomohli mi i s Google reklamou.',
     name: 'Jana P.',
     role: 'Kosmetická poradkyně, Brno',
     initial: 'J',
-    color: 'bg-[#fdc700]',
+    accent: 'bg-[#fdc700]',
     textColor: 'text-neutral-900',
   },
   {
@@ -22,21 +23,29 @@ const testimonials = [
     name: 'Tomáš R.',
     role: 'Truhlář na zakázku, Ostrava',
     initial: 'T',
-    color: 'bg-[#292e4c]',
+    accent: 'bg-[#292e4c]',
+    textColor: 'text-white',
   },
 ];
 ---
 
-<section class="py-16 md:py-24 bg-neutral-50" id="reference">
+<section class="py-20 md:py-28 bg-white" id="reference">
   <Container>
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="text-center mb-14">
         <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-3">Reference</p>
-        <h2 class="text-3xl font-bold text-neutral-800">Co říkají lidé, kteří to zažili</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-800">Co říkají lidé, kteří to zažili</h2>
+        <p class="text-neutral-500 mt-3">Skutečné příběhy. Skutečné výsledky.</p>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {testimonials.map((t) => (
-          <div class="bg-white rounded-2xl p-6 shadow-md border border-neutral-100 flex flex-col">
+          <div class="group relative bg-neutral-50 hover:bg-white border border-neutral-200 hover:border-[#fdc700] hover:shadow-xl rounded-3xl p-7 flex flex-col transition-all duration-300">
+
+            <!-- Dekorativní uvozovka -->
+            <div class="text-7xl font-serif leading-none text-[#fdc700]/30 select-none mb-2 -mt-2">"</div>
+
             <!-- Hvězdičky -->
             <div class="flex gap-0.5 mb-4">
               {[1,2,3,4,5].map(() => (
@@ -45,16 +54,19 @@ const testimonials = [
                 </svg>
               ))}
             </div>
-            <p class="text-neutral-700 mb-5 flex-1 leading-relaxed">"{t.text}"</p>
-            <div class="flex items-center gap-3 pt-4 border-t border-neutral-100">
-              <div class={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center font-bold ${t.textColor ?? 'text-white'}`}>
+
+            <p class="text-neutral-700 mb-6 flex-1 leading-relaxed text-[15px]">{t.text}</p>
+
+            <div class="flex items-center gap-3 pt-5 border-t border-neutral-200">
+              <div class={`w-11 h-11 rounded-full ${t.accent} flex items-center justify-center font-bold text-base ${t.textColor} flex-shrink-0`}>
                 {t.initial}
               </div>
               <div>
-                <div class="font-semibold text-neutral-800 text-sm">{t.name}</div>
-                <div class="text-xs text-neutral-500">{t.role}</div>
+                <div class="font-bold text-neutral-800 text-sm">{t.name}</div>
+                <div class="text-xs text-neutral-500 mt-0.5">{t.role}</div>
               </div>
             </div>
+
           </div>
         ))}
       </div>

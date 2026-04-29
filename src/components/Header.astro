@@ -1,38 +1,93 @@
 ---
 import Container from './ui/Container.astro';
-
-const base = import.meta.env.BASE_URL;
 ---
 
-<header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+
+<header id="site-header" class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200 transition-shadow duration-300">
   <Container>
-    <nav class="flex items-center justify-between md:justify-center py-2 md:py-3 gap-4">
-      <a href={base} class="flex items-center flex-shrink-0">
-        <img src={`${base}logo.png`} alt="Odstartujto" class="h-10 md:h-12 w-auto" />
+    <nav class="flex items-center justify-between py-3 md:py-4 gap-4">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center flex-shrink-0">
+        <img src="/logo.png" alt="Odstartujto" class="h-9 md:h-11 w-auto" />
       </a>
-      <div class="hidden md:flex items-center gap-5">
-        <a href={`${base}#jak-funguje`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Jak to funguje</a>
-        <a href={`${base}#reseni`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Ceník</a>
-        <a href={`${base}#reference`} class="text-neutral-600 hover:text-[#292e4c] text-sm">Reference</a>
-        <a href="#poptavka" class="bg-[#fdc700] text-neutral-900 hover:bg-[#e6b300] font-semibold text-sm px-4 py-2 rounded-xl transition-colors">Zjistit cenu</a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-1">
+        <a href="#jak-funguje" class="text-neutral-600 hover:text-[#292e4c] hover:bg-neutral-100 text-sm font-medium px-3 py-2 rounded-lg transition-colors">Jak to funguje</a>
+        <a href="#reseni" class="text-neutral-600 hover:text-[#292e4c] hover:bg-neutral-100 text-sm font-medium px-3 py-2 rounded-lg transition-colors">Co dostanete</a>
+        <a href="#reference" class="text-neutral-600 hover:text-[#292e4c] hover:bg-neutral-100 text-sm font-medium px-3 py-2 rounded-lg transition-colors">Reference</a>
+        <a href="#o-nas" class="text-neutral-600 hover:text-[#292e4c] hover:bg-neutral-100 text-sm font-medium px-3 py-2 rounded-lg transition-colors">O nás</a>
       </div>
-      <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-600 ml-auto" aria-label="Menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-      </button>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:flex items-center gap-3">
+        <span class="text-xs text-neutral-500 hidden lg:block">od <strong class="text-neutral-800">9 400 Kč</strong></span>
+        <a href="#poptavka" class="group bg-[#fdc700] text-neutral-900 hover:bg-[#292e4c] hover:text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-1.5">
+          Chci web za 5 dnů
+          <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile CTA + Hamburger -->
+      <div class="md:hidden flex items-center gap-2">
+        <a href="#poptavka" class="bg-[#fdc700] text-neutral-900 font-bold text-sm px-4 py-2 rounded-xl transition-colors">
+          Nezávazná nabídka
+        </a>
+        <button id="mobile-menu-btn" class="p-2 text-neutral-600 rounded-lg hover:bg-neutral-100 transition-colors" aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+      </div>
+
     </nav>
-    <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-neutral-100 pt-2">
-      <a href={`${base}#jak-funguje`} class="block py-2 text-neutral-600 text-base">Jak to funguje</a>
-      <a href={`${base}#reseni`} class="block py-2 text-neutral-600 text-base">Ceník</a>
-      <a href={`${base}#reference`} class="block py-2 text-neutral-600 text-base">Reference</a>
-      <a href="#poptavka" class="block py-2 text-base font-semibold text-[#292e4c] bg-[#fdc700]/20 rounded-lg px-3 py-2 mt-2 text-center">Zjistit cenu</a>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-100 pt-3 pb-5 space-y-1">
+      <a href="#jak-funguje" class="flex items-center gap-2 py-2.5 px-3 text-neutral-700 text-base rounded-lg hover:bg-neutral-50 transition-colors">
+        <svg class="w-4 h-4 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        Jak to funguje
+      </a>
+      <a href="#reseni" class="flex items-center gap-2 py-2.5 px-3 text-neutral-700 text-base rounded-lg hover:bg-neutral-50 transition-colors">
+        <svg class="w-4 h-4 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        Co dostanete
+      </a>
+      <a href="#reference" class="flex items-center gap-2 py-2.5 px-3 text-neutral-700 text-base rounded-lg hover:bg-neutral-50 transition-colors">
+        <svg class="w-4 h-4 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        Reference
+      </a>
+      <a href="#o-nas" class="flex items-center gap-2 py-2.5 px-3 text-neutral-700 text-base rounded-lg hover:bg-neutral-50 transition-colors">
+        <svg class="w-4 h-4 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        O nás
+      </a>
+      <div class="pt-3 border-t border-neutral-100 mt-2">
+        <a href="#poptavka" class="flex items-center justify-center gap-2 w-full bg-[#fdc700] text-neutral-900 font-bold text-base px-4 py-3 rounded-xl transition-colors hover:bg-[#e6b300]">
+          Chci web za 5 dnů
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+        <p class="text-center text-xs text-neutral-500 mt-2">Bez závazků · Odpovídáme do 24 h</p>
+      </div>
     </div>
   </Container>
 </header>
+
 <script>
+  // Mobile menu toggle
   document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
     document.getElementById('mobile-menu')?.classList.toggle('hidden');
   });
-  document.querySelectorAll('#mobile-menu a[href^="#"]').forEach((link) => {
+  document.querySelectorAll('#mobile-menu a').forEach((link) => {
     link.addEventListener('click', () => document.getElementById('mobile-menu')?.classList.add('hidden'));
+  });
+
+  // Shadow on scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      header?.classList.add('shadow-md');
+      header?.classList.remove('border-b', 'border-neutral-200');
+    } else {
+      header?.classList.remove('shadow-md');
+      header?.classList.add('border-b', 'border-neutral-200');
+    }
   });
 </script>

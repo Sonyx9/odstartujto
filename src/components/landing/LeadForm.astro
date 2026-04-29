@@ -1,74 +1,153 @@
 ---
 import Container from '../ui/Container.astro';
 
-// Na statickém hostingu (GitHub Pages) přímo Google Apps Script; lokálně lze přepsat PUBLIC_FORM_ACTION na /api/send-lead s `astro dev` + SSR.
-const FORM_ACTION_DEFAULT =
-  'https://script.google.com/macros/s/AKfycbzCT1aeSBP8LROuszNjbLTibvk08NttjLi_4UEyozgzdPAm2i9hsvjsTcziBHspBqW0vg/exec';
-const FORM_ACTION = import.meta.env.PUBLIC_FORM_ACTION ?? FORM_ACTION_DEFAULT;
+// Odesílá na serverový proxy /api/send-lead (ten volá Google Apps Script) – žádný CORS. Token musí odpovídat script.js.
+const FORM_ACTION = import.meta.env.PUBLIC_FORM_ACTION ?? '/api/send-lead';
 const FORM_TOKEN = import.meta.env.PUBLIC_FORM_TOKEN ?? '1506-123-12-157489-13589-odstartujto';
 ---
 
-<section class="py-16 md:py-24 bg-[#292e4c]" id="poptavka">
+<section class="relative overflow-hidden bg-[#292e4c] py-20 md:py-28" id="poptavka">
+
+  <!-- Dekorativní blob -->
+  <div class="pointer-events-none absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#fdc700]/5 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-white/5 blur-3xl" aria-hidden="true"></div>
+
   <Container>
-    <div class="max-w-2xl mx-auto bg-white rounded-2xl p-6 md:p-8 shadow-xl">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Nezávazná poptávka</h2>
-      <p class="text-neutral-600 text-center mb-8">Vyplňte formulář a ozveme se do 48 hodin.</p>
-      <form
-        id="lead-form"
-        class="space-y-6"
-        data-action={FORM_ACTION}
-        data-token={FORM_TOKEN}
-      >
-        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label for="name" class="block text-sm font-semibold mb-2 text-neutral-800">Jméno a příjmení *</label>
-            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="Jan Novák" />
+    <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-5xl mx-auto">
+
+      <!-- Levý sloupec: důvěra -->
+      <div class="text-white">
+        <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-5">Pojďme na to</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+          Váš web může být hotový<br />
+          <span class="text-[#fdc700]">za 5 dní od teď.</span>
+        </h2>
+        <p class="text-white/70 text-lg mb-10 leading-relaxed">
+          Napište nám. Ozveme se do 24 hodin, probereme váš projekt a dáme vám přesnou nabídku – zdarma, bez závazků.
+        </p>
+
+        <!-- Benefity -->
+        <ul class="space-y-4 mb-10">
+          {[
+            'Odpovídáme do 24 hodin',
+            'Nabídka zdarma, bez závazků',
+            'Web od 9 400 Kč, spuštění do 5 dnů',
+            'Hosting a správa jen 2 890 Kč/rok.',
+            'Web je váš – žádné smlouvy',
+          ].map((item) => (
+            <li class="flex items-center gap-3 text-white/85 text-[15px]">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#fdc700]/20 flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-[#fdc700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                </svg>
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <!-- Avatary -->
+        <div class="flex items-center gap-3 pt-8 border-t border-white/10">
+          <div class="flex -space-x-2">
+            <img
+              src="https://digitance.cz/images/lukas-koula.webp"
+              alt="Lukáš Koula"
+              class="w-9 h-9 rounded-full border-2 border-[#292e4c] object-cover"
+              loading="lazy"
+            />
+            <img
+              src="https://digitance.cz/images/stano-hazucha.jpeg"
+              alt="Standa Hazucha"
+              class="w-9 h-9 rounded-full border-2 border-[#292e4c] object-cover"
+              loading="lazy"
+            />
           </div>
           <div>
-            <label for="email" class="block text-sm font-semibold mb-2 text-neutral-800">E-mail *</label>
-            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="jan@example.cz" />
+            <p class="text-white font-semibold text-sm">Lukáš a Standa</p>
+            <p class="text-white/50 text-xs">Odpovídají osobně</p>
           </div>
         </div>
-        <div>
-          <label for="phone" class="block text-sm font-semibold mb-2 text-neutral-800">Telefon *</label>
-          <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent" placeholder="+420 123 456 789" />
-        </div>
-        <div>
-          <label for="goal" class="block text-sm font-semibold mb-2 text-neutral-800">Cíl webu *</label>
-          <select id="goal" name="goal" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent">
-            <option value="">Vyberte cíl webu</option>
-            <option value="poptavky">Poptávky a prodej</option>
-            <option value="prezentace">Prezentace firmy</option>
-            <option value="nabor">Nábor zaměstnanců</option>
-            <option value="jine">Jiné</option>
-          </select>
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-semibold mb-2 text-neutral-800">Zpráva *</label>
-          <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-neutral-300 rounded-2xl focus:ring-2 focus:ring-[#292e4c] focus:border-transparent resize-none" placeholder="Napište, co od webu očekáváte..."></textarea>
-        </div>
-        <div class="relative">
-          <button type="submit" id="form-submit-btn" class="w-full bg-[#292e4c] hover:opacity-90 text-white font-semibold text-lg py-4 rounded-2xl transition-opacity disabled:opacity-70 disabled:pointer-events-none">
-            Odeslat poptávku
-          </button>
-          <div id="form-loading" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/95 rounded-2xl py-4">
-            <svg class="animate-spin h-8 w-8 text-[#292e4c]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span class="text-neutral-700 font-semibold">Vyčkejte, odesílám…</span>
+      </div>
+
+      <!-- Pravý sloupec: formulář -->
+      <div class="bg-white rounded-3xl p-7 md:p-9 shadow-2xl">
+        <h3 class="text-xl font-bold text-neutral-800 mb-1">Nezávazná poptávka</h3>
+        <p class="text-neutral-500 text-sm mb-7">Vyplňte formulář, ozveme se do 24 hodin.</p>
+
+        <form id="lead-form" class="space-y-5" data-action={FORM_ACTION} data-token={FORM_TOKEN}>
+          <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="name" class="block text-xs font-semibold mb-1.5 text-neutral-600 uppercase tracking-wide">Jméno *</label>
+              <input type="text" id="name" name="name" required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#fdc700] focus:border-transparent outline-none transition text-sm"
+                placeholder="Jan Novák" />
+            </div>
+            <div>
+              <label for="email" class="block text-xs font-semibold mb-1.5 text-neutral-600 uppercase tracking-wide">E-mail *</label>
+              <input type="email" id="email" name="email" required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#fdc700] focus:border-transparent outline-none transition text-sm"
+                placeholder="jan@firma.cz" />
+            </div>
           </div>
+
+          <div>
+            <label for="phone" class="block text-xs font-semibold mb-1.5 text-neutral-600 uppercase tracking-wide">Telefon *</label>
+            <input type="tel" id="phone" name="phone" required
+              class="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#fdc700] focus:border-transparent outline-none transition text-sm"
+              placeholder="+420 777 123 456" />
+          </div>
+
+          <div>
+            <label for="goal" class="block text-xs font-semibold mb-1.5 text-neutral-600 uppercase tracking-wide">Cíl webu *</label>
+            <select id="goal" name="goal" required
+              class="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#fdc700] focus:border-transparent outline-none transition text-sm bg-white">
+              <option value="">Vyberte cíl webu</option>
+              <option value="poptavky">Poptávky a prodej</option>
+              <option value="prezentace">Prezentace firmy</option>
+              <option value="nabor">Nábor zaměstnanců</option>
+              <option value="jine">Jiné</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-xs font-semibold mb-1.5 text-neutral-600 uppercase tracking-wide">Zpráva *</label>
+            <textarea id="message" name="message" rows="3" required
+              class="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#fdc700] focus:border-transparent outline-none transition resize-none text-sm"
+              placeholder="Napište, co od webu očekáváte..."></textarea>
+          </div>
+
+          <div class="relative pt-1">
+            <button type="submit" id="form-submit-btn"
+              class="w-full bg-[#fdc700] hover:bg-[#292e4c] hover:text-white text-neutral-900 font-bold text-base py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-70 disabled:pointer-events-none flex items-center justify-center gap-2">
+              Odeslat poptávku
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </button>
+            <div id="form-loading" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/95 rounded-xl">
+              <svg class="animate-spin h-6 w-6 text-[#292e4c]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span class="text-neutral-600 text-sm font-medium">Odesílám…</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-center text-neutral-400">Vaše údaje jsou v bezpečí. Nespamujeme.</p>
+        </form>
+
+        <div id="form-success" class="hidden text-center py-10">
+          <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <p class="text-xl font-bold text-neutral-800 mb-1">Díky, zpráva odeslána!</p>
+          <p class="text-neutral-500 text-sm">Ozveme se vám do 24 hodin.</p>
         </div>
-        <p class="text-sm text-center text-neutral-500">Všechna pole jsou povinná. Ozveme se do 48 hodin.</p>
-      </form>
-      <div id="form-success" class="hidden text-center py-8">
-        <p class="text-2xl font-bold text-green-600 mb-2">Děkujeme za poptávku!</p>
-        <p class="text-neutral-600">Ozveme se vám do 48 hodin.</p>
+        <div id="form-error" class="hidden text-center py-4">
+          <p class="text-red-600 font-semibold text-sm"></p>
+        </div>
       </div>
-      <div id="form-error" class="hidden text-center py-4">
-        <p class="text-red-600 font-semibold"></p>
-      </div>
+
     </div>
   </Container>
 </section>

@@ -2,28 +2,52 @@
 import Container from '../ui/Container.astro';
 
 const faqs = [
-  { q: 'Kolik stojí jednoduchý statický web?', a: 'Cena webu je přehledná a výrazně nižší než u agenturní tvorby. Platíte za hotový web včetně hostingu a základní správy. Navazující marketing (Google Ads) nabízíme volitelně od 1 970 Kč/měsíc.' },
-  { q: 'Je prodej webu vhodný i pro malé firmy a živnostníky?', a: 'Ano. Jednoduché statické weby jsou ideální pro podnikatele, kteří chtějí profesionální webové stránky za férovou cenu. Nabízíme i navazující marketing, když budete chtít růst.' },
-  { q: 'Jak rychle můžete web spustit?', a: 'Díky předpřipravené struktuře můžeme web spustit během několika dnů, nikoliv měsíců. Rychlé spuštění je u nás standard.' },
+  { q: 'Kolik stojí jednoduchý statický web?', a: 'Tvorba statického webu začíná od 9 400 Kč. Hosting a technická správa nejsou součástí tvorby a účtují se zvlášť za 2 890 Kč/rok. Navazující marketing (Google Ads) nabízíme volitelně od 1 970 Kč/měsíc.' },
+  { q: 'Je to vhodné i pro malé firmy a živnostníky?', a: 'Ano. Jednoduché statické weby jsou ideální pro podnikatele, kteří chtějí profesionální webové stránky za férovou cenu. Nabízíme i navazující marketing, když budete chtít růst.' },
+  { q: 'Jak rychle web spustíte?', a: 'Díky předpřipravené struktuře můžeme web spustit během několika dnů, nikoliv měsíců. Rychlé spuštění je u nás standard – průměrně do 5 pracovních dnů.' },
   { q: 'Co když budu chtít web upravit nebo změnit obsah?', a: 'Úpravy webu řešíme i po předání. Navazující marketing zahrnuje i průběžnou péči o obsah a SEO.' },
-  { q: 'Budu web vlastnit?', a: 'Ano. Web kupujete a vlastníte. Po předání běží na vaší doméně. Navazující marketing (Google Ads) nabízíme jako dobrovolnou službu.' },
-  { q: 'Co je navazující marketing?', a: 'Správa reklamních kampaní Google Ads a průběžná péče o viditelnost webu. Nabízíme ho volitelně po dokončení webu.' },
+  { q: 'Budu web skutečně vlastnit?', a: 'Ano. Web kupujete a vlastníte. Po předání běží na vaší doméně. Žádné smlouvy, žádné závazky. Navazující marketing (Google Ads) nabízíme jako dobrovolnou službu.' },
+  { q: 'Co je navazující marketing?', a: 'Správa reklamních kampaní Google Ads a průběžná péče o viditelnost webu. Nabízíme ho volitelně po dokončení webu – jen pokud to pro vás dává smysl.' },
 ];
 ---
 
-<section class="py-16 md:py-24 bg-white" id="faq">
+<section class="py-20 md:py-28 bg-neutral-50" id="faq">
   <Container>
-    <h2 class="text-3xl font-bold mb-12 text-center">Často kladené otázky</h2>
-    <div class="max-w-3xl mx-auto space-y-4">
-      {faqs.map((faq, i) => (
-        <div class="border border-neutral-200 rounded-2xl overflow-hidden">
-          <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-neutral-50 font-semibold" data-i={i}>
-            {faq.q}
-            <svg class="faq-icon w-6 h-6 text-[#292e4c] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </button>
-          <div class="faq-content hidden px-6 pb-6 text-neutral-600" data-i={i}>{faq.a}</div>
-        </div>
-      ))}
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-14">
+        <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-3">Máte otázky?</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-800">Nejčastější dotazy</h2>
+        <p class="text-neutral-500 mt-3">Nenašli jste odpověď? Napište nám.</p>
+      </div>
+
+      <div class="space-y-3">
+        {faqs.map((faq, i) => (
+          <div class="faq-item bg-white border border-neutral-200 rounded-2xl overflow-hidden transition-all duration-200" data-i={i}>
+            <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4" data-i={i}>
+              <div class="flex items-center gap-4">
+                <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-neutral-100 flex items-center justify-center text-xs font-bold text-neutral-500 faq-num">{i + 1}</span>
+                <span class="font-semibold text-neutral-800 text-[15px]">{faq.q}</span>
+              </div>
+              <svg class="faq-icon flex-shrink-0 w-5 h-5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-6 text-neutral-600 leading-relaxed text-sm border-t border-neutral-100 pt-4" data-i={i}>{faq.a}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Kontaktní CTA pod FAQ -->
+      <div class="mt-10 text-center bg-white border border-neutral-200 rounded-2xl px-8 py-7">
+        <p class="font-semibold text-neutral-800 mb-1">Pořád si nejste jistí?</p>
+        <p class="text-neutral-500 text-sm mb-4">Napište nám a rádi vše vysvětlíme – bez závazků.</p>
+        <a href="#poptavka" class="inline-flex items-center gap-2 bg-[#fdc700] hover:bg-[#292e4c] hover:text-white text-neutral-900 font-bold px-6 py-2.5 rounded-xl text-sm transition-colors">
+          Zeptat se zdarma
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+
     </div>
   </Container>
 </section>
@@ -33,12 +57,27 @@ const faqs = [
       const i = btn.getAttribute('data-i');
       const content = document.querySelector(`.faq-content[data-i="${i}"]`);
       const icon = btn.querySelector('.faq-icon');
+      const item = btn.closest('.faq-item');
+      const num = btn.querySelector('.faq-num');
       const isOpen = !content?.classList.contains('hidden');
+
+      // Zavřít všechny
       document.querySelectorAll('.faq-content').forEach((c) => c.classList.add('hidden'));
       document.querySelectorAll('.faq-icon').forEach((ic) => ic.classList.remove('rotate-180'));
+      document.querySelectorAll('.faq-item').forEach((el) => {
+        el.classList.remove('border-[#fdc700]', 'shadow-md');
+      });
+      document.querySelectorAll('.faq-num').forEach((n) => {
+        n.classList.remove('bg-[#fdc700]', 'text-neutral-900');
+        n.classList.add('bg-neutral-100', 'text-neutral-500');
+      });
+
       if (!isOpen) {
         content?.classList.remove('hidden');
         icon?.classList.add('rotate-180');
+        item?.classList.add('border-[#fdc700]', 'shadow-md');
+        num?.classList.remove('bg-neutral-100', 'text-neutral-500');
+        num?.classList.add('bg-[#fdc700]', 'text-neutral-900');
       }
     });
   });

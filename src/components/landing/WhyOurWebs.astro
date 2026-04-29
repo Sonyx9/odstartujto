@@ -1,57 +1,76 @@
 ---
 import Container from '../ui/Container.astro';
+
+const pillars = [
+  {
+    title: 'Tisíce vyhledávacích dotazů',
+    desc: 'Ahrefs, Google Search Console – víme přesně, co vaši zákazníci hledají. Texty i struktura webu tomu odpovídají.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>`,
+    label: 'SEO data',
+  },
+  {
+    title: 'Reálná konverzní data',
+    desc: 'Sledujeme, kde návštěvníci klikají a kam odcházejí. Stránky jsou navrženy tak, aby vedli k poptávce.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>`,
+    label: 'Konverze',
+  },
+  {
+    title: 'Ověřené SEO struktury',
+    desc: 'Používáme struktury, které Google dlouhodobě preferuje – rychlé načítání, správné nadpisy, technická čistota.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>`,
+    label: 'Technická kvalita',
+  },
+];
 ---
 
 <section id="proc-nase-weby" class="py-20 md:py-28 bg-neutral-50 scroll-mt-20">
   <Container>
     <div class="max-w-5xl mx-auto">
+
       <!-- Nadpis -->
-      <div class="text-center mb-14 md:mb-18">
+      <div class="text-center mb-14">
+        <p class="text-sm font-semibold text-[#fdc700] uppercase tracking-widest mb-4">Proč to funguje</p>
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 mb-4 leading-tight">
-          Proč naše weby <span class="relative inline-block px-3 py-1"><span class="absolute inset-0 bg-[#fdc700] rounded-sm -z-10" aria-hidden="true"></span><span class="relative z-10 text-neutral-800">vydělávají víc</span></span> než běžná konkurence
+          Weby stavíme na datech.<br />
+          <span class="relative inline-block px-3 py-1">
+            <span class="absolute inset-0 bg-[#fdc700] rounded-sm -z-10" aria-hidden="true"></span>
+            <span class="relative z-10 text-neutral-800">Ne na pocitu.</span>
+          </span>
         </h2>
-        <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
-          Za 10+ let jsme viděli, co funguje a co ne. Naše struktury a obsah vychází z reálných dat — ne z pocitu, jak by web měl vypadat.
+        <p class="text-lg text-neutral-600 max-w-xl mx-auto mt-4">
+          Za 10+ let jsme viděli, co funguje a co ne. Každý web vychází z reálných dat.
         </p>
       </div>
 
       <!-- 3 karty -->
-      <div class="mb-14 md:mb-18">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="group bg-neutral-50 rounded-2xl p-6 border-2 border-transparent hover:border-[#fdc700] transition-all">
-            <div class="w-12 h-12 bg-[#292e4c] rounded-xl flex items-center justify-center mb-4 text-white">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {pillars.map((p) => (
+          <div class="group bg-white rounded-2xl p-7 border border-neutral-200 hover:border-[#fdc700] hover:shadow-lg transition-all duration-200">
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 bg-[#292e4c] group-hover:bg-[#fdc700] rounded-xl flex items-center justify-center text-white group-hover:text-neutral-900 transition-colors duration-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={p.icon} />
+              </div>
+              <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide">{p.label}</span>
             </div>
-            <p class="font-semibold text-neutral-800 mb-2">Analýzy tisíců vyhledávacích dotazů</p>
-            <p class="text-neutral-600 text-sm">Ahrefs, Google Search data</p>
+            <h3 class="font-bold text-neutral-800 mb-2 text-lg">{p.title}</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">{p.desc}</p>
           </div>
-          <div class="group bg-neutral-50 rounded-2xl p-6 border-2 border-transparent hover:border-[#fdc700] transition-all">
-            <div class="w-12 h-12 bg-[#292e4c] rounded-xl flex items-center justify-center mb-4 text-white">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-            </div>
-            <p class="font-semibold text-neutral-800 mb-2">Reálných konverzních dat</p>
-            <p class="text-neutral-600 text-sm">Z oborů služeb a B2B</p>
-          </div>
-          <div class="group bg-neutral-50 rounded-2xl p-6 border-2 border-transparent hover:border-[#fdc700] transition-all">
-            <div class="w-12 h-12 bg-[#292e4c] rounded-xl flex items-center justify-center mb-4 text-white">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
-            </div>
-            <p class="font-semibold text-neutral-800 mb-2">Ověřených SEO struktur</p>
-            <p class="text-neutral-600 text-sm">Které Google dlouhodobě preferuje</p>
-          </div>
-        </div>
+        ))}
       </div>
 
-      <!-- Každý web je postavený tak, aby: -->
-      <div class="mb-14 md:mb-18 text-center">
-        <p class="text-lg font-semibold text-neutral-800 mb-6">Každý web je postavený na datech, ne na pocitu.</p>
+      <!-- Závěrečný punch – přepracovaný -->
+      <div class="relative overflow-hidden bg-[#292e4c] rounded-3xl px-8 md:px-16 py-12 md:py-16 text-center">
+        <!-- Dekorativní kruhy -->
+        <div class="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#fdc700]/10" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-white/5" aria-hidden="true"></div>
+        <p class="relative text-white/50 text-lg md:text-xl mb-3 font-light">Hezký web nestačí.</p>
+        <p class="relative text-4xl md:text-5xl font-bold text-[#fdc700] mb-6">Chcete web, který vydělává.</p>
+        <a href="#poptavka" class="inline-flex items-center gap-2 bg-[#fdc700] hover:bg-white text-neutral-900 font-bold px-8 py-3.5 rounded-2xl transition-colors text-base">
+          Takový web vám uděláme
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
       </div>
 
-      <!-- Závěrečný punch -->
-      <div class="text-center py-10 md:py-14 px-6 bg-neutral-800 rounded-2xl">
-        <p class="text-xl md:text-2xl text-neutral-400 mb-2">Ne hezký web.</p>
-        <p class="text-3xl md:text-4xl font-bold text-[#fdc700]">Funkční web.</p>
-      </div>
     </div>
   </Container>
 </section>
